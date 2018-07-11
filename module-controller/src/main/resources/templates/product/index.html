@@ -4,7 +4,16 @@
     <meta charset="UTF-8" />
     <title th:utext="${title}"></title>
 </head>
+<th:block th:include="fragments/header"></th:block>
+<br/>
+<br/>
+<br/>
 <body>
-    <h3 th:utext="${title}"></h3>
+    <div class="container" ng-app="DataProductApp"
+         ng-controller="DataProductCtrl">
+        <div class="container-fluid">
+            <h3 th:utext="${title}"></h3>
+        </div>
+    </div>
 </body>
 </html>

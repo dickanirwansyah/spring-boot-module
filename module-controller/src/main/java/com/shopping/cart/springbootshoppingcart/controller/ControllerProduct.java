@@ -19,7 +19,6 @@ public class ControllerProduct {
         ModelAndView view = new ModelAndView();
         view.setViewName("product/index");
         view.addObject("title", "Data Product");
-        view.addObject("list", productService.listProduct());
         return view;
     }
 }

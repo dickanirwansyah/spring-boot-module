@@ -15,6 +15,7 @@
 		<module>module-model</module>
 		<module>module-request</module>
 		<module>module-validator</module>
+		<module>module-configuration</module>
 	</modules>
 
 	<packaging>pom</packaging>

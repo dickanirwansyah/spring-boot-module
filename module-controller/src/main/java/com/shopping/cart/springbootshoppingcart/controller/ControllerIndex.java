@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/api/hallo/v1")
-public class ControllerHallo {
+@RequestMapping(value = {"/", "/index", "/home"})
+public class ControllerIndex {
 
     /**
      *@author dickanirwansyah
