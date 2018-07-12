@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:utext="${title}"></title>
+</head>
+<th:block th:include="fragments/header"></th:block>
+<body>
+    <div class="container">
+        <div class="container-fluid">
+            <div align="center">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 th:utext="${title}"></h4>
+                        </div>
+                        <form class="form-horizontal"
+                              method="post"
+                              th:action="@{/update_product}"
+                              th:object="${productRequest}"
+                        enctype="multipart/form-data">
+                            <input type="hidden" th:field="*{newProduct}"/>
+                        <div class="card-body">
+                            <!--check productId-->
+                            <th:block th:if="${!productRequest.newProduct}">
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                    <input type="text" class="form-control" th:field="*{productId}" readonly=""/>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <img th:src="@{|/productImage?productId=${productRequest.productId}|}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <input type="text" placeholder="Name of product" class="form-control" th:field="*{productName}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="Price of product" class="form-control" th:field="*{productPrice}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="Stock of product" class="form-control" th:field="*{productStock}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <input type="file" class="form-control" th:field="*{productMultipartFile}" placeholder="Image of product"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <a href="product" class="btn btn-danger">Kembali</a>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -13,6 +13,8 @@
         <a href="add_product" class="btn btn-primary">
             Tambah Data Product
         </a>
+        <br/>
+        <br/>
         <div class="page-header">
             <table class="table table-hover table-striped">
                 <thead>
@@ -29,14 +31,15 @@
                     <tr ng-repeat="product in products">
                         <td>{{$index+1}}</td>
                         <td>
-                            <img ng-src="productImage?productId={{product.idproduct}}" />
+                            <img ng-src="productImage?productId={{product.idproduct}}"
+                            width="150px" height="120px"/>
                         </td>
                         <td>{{product.name}}</td>
                         <td>{{product.price | currency:"Rp "}}</td>
                         <td>{{product.stock}}</td>
                         <td>
-                            <button class="btn btn-primary">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                            <a href="/show_product?productId={{product.idproduct}}" class="btn btn-info">Update</a>
+                            <a href="" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 </tbody>

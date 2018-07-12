@@ -55,6 +55,7 @@ public class ControllerProduct {
         return view;
     }
 
+
     @GetMapping(value = {"/productImage"})
     public void productImage(HttpServletRequest request,
                              HttpServletResponse response,
@@ -70,6 +71,27 @@ public class ControllerProduct {
         }
         response.getOutputStream().close();
     }
+
+    @GetMapping(value = "/show_product")
+    public String showProduct(@RequestParam(value = "productId")String productId,
+                              Model model){
+
+        ProductRequest productRequest = null;
+        if (productId!=null && productId.length() > 0){
+            Product product = productService.byId(productId);
+            if (product!=null){
+                productRequest = new ProductRequest(product);
+            }
+        }
+        if (productRequest==null){
+            productRequest = new ProductRequest();
+            productRequest.setNewProduct(true);
+        }
+        model.addAttribute("title", "Detail Product");
+        model.addAttribute("productRequest", productRequest);
+        return "product/update";
+    }
+
 
     @GetMapping(value = "/add_product")
     public String viewAddProduct(Model model){
@@ -102,6 +124,28 @@ public class ControllerProduct {
             String message = throwable.getMessage();
             model.addAttribute("errorMessage", message);
             return "product/create";
+        }
+        return "redirect:/product";
+    }
+
+    @PostMapping(value = "/update_product")
+    public String updateProduct(@ModelAttribute("productRequest")
+                                @Validated ProductRequest productRequest,
+                                BindingResult result,
+                                Model model,
+                                final RedirectAttributes redirectAttributes){
+        if (result.hasErrors()){
+            return "product/update";
+        }
+        try{
+            productService.updateProduct(productRequest);
+        }catch (Exception e){
+            e.printStackTrace();
+            Throwable throwable = ExceptionUtils.getRootCause(e);
+            model.addAttribute("title", "Detail Product");
+            String message = throwable.getMessage();
+            model.addAttribute("errorMessage", message);
+            return "product/update";
         }
         return "redirect:/product";
     }

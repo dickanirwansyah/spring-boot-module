@@ -14,5 +14,7 @@ public interface ProductService {
 
     Product createProduct(ProductRequest productRequest) throws Exception;
 
+    Product updateProduct(ProductRequest productRequest) throws Exception;
+
     List<Product> listProduct();
 }

@@ -63,6 +63,30 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
 
+    @Override
+    public Product updateProduct(ProductRequest productRequest) throws Exception {
+            Product product = editProduct(
+                    productRequest.getProductId(),
+                    productRequest.getProductName(),
+                    productRequest.getProductStock(),
+                    productRequest.getProductPrice()
+            );
+
+        //handling image
+        if (productRequest.getProductMultipartFile()!=null){
+            byte[] images = null;
+            try{
+                images = productRequest.getProductMultipartFile().getBytes();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            if (images!=null && images.length > 0){
+                product.setImage(images);
+            }
+        }
+        return productRepository.save(product);
+    }
+
     private String saveUpload(MultipartFile[] files) throws Exception{
         File uploadDir = new File(upload_dir);
         uploadDir.mkdirs();
@@ -85,6 +109,16 @@ public class ProductServiceImpl implements ProductService {
 
     private Product newProduct(String name, Integer stock, Integer price){
         return Product.builder()
+                .name(name)
+                .stock(stock)
+                .price(price)
+                .created(new Date())
+                .build();
+    }
+
+    private Product editProduct(String productId, String name, Integer stock, Integer price){
+        return Product.builder()
+                .idproduct(productId)
                 .name(name)
                 .stock(stock)
                 .price(price)
