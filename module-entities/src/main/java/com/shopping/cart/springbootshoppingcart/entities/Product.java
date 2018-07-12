@@ -39,6 +39,9 @@ public class Product {
     @Column(name = "image", length = Integer.MAX_VALUE)
     private byte[] image;
 
+    @Column(name = "images")
+    private String images;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     @Temporal(TemporalType.TIMESTAMP)

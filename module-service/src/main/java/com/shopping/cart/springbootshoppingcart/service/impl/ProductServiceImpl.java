@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +24,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    private static String upload_dir = System.getProperty("user.home")+"/test";
+
     @Override
     public Optional<Product> findById(String productId) {
         return productRepository.findById(productId);
@@ -27,16 +33,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product byId(String productId) {
-        return productRepository.getOne(productId);
+        return productRepository.findByIdproduct(productId);
     }
 
     @Override
-    public Product createProduct(ProductRequest productRequest) {
+    public Product createProduct(ProductRequest productRequest) throws Exception{
         Product product = newProduct(productRequest.getProductName(),
                 productRequest.getProductStock(),
                 productRequest.getProductPrice());
 
         //handling image
+
         if (productRequest.getProductMultipartFile()!=null){
             byte[] images = null;
             try{
@@ -48,7 +55,32 @@ public class ProductServiceImpl implements ProductService {
                 product.setImage(images);
             }
         }
+
+        /**
+        String resultImages = this.saveUpload(productRequest.getProductMultipartFile());
+        product.setImages(resultImages);
+         **/
         return productRepository.save(product);
+    }
+
+    private String saveUpload(MultipartFile[] files) throws Exception{
+        File uploadDir = new File(upload_dir);
+        uploadDir.mkdirs();
+        StringBuilder sb = new StringBuilder();
+        for (MultipartFile file: files){
+            if (file.isEmpty()){
+                continue;
+            }
+            String uploadFilePath = upload_dir + "/" + file.getOriginalFilename();
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(uploadFilePath);
+            Files.write(path, bytes);
+            /** jika save keseluruhan
+            sb.append(uploadFilePath).append(",");
+             **/
+            sb.append(uploadFilePath);
+        }
+        return sb.toString();
     }
 
     private Product newProduct(String name, Integer stock, Integer price){

@@ -12,7 +12,7 @@ public interface ProductService {
 
     Product byId(String productId);
 
-    Product createProduct(ProductRequest productRequest);
+    Product createProduct(ProductRequest productRequest) throws Exception;
 
     List<Product> listProduct();
 }

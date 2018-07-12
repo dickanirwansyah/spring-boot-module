@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,5 +25,12 @@ public class ControllerProductApi {
         return Optional.ofNullable(productService.listProduct())
                 .map(callbackJSON -> new ResponseEntity<>(callbackJSON, HttpStatus.OK))
                 .orElse(new ResponseEntity<List<Product>>(HttpStatus.BAD_REQUEST));
+    }
+
+    @GetMapping(value = "/{productId}")
+    public ResponseEntity<Product> getId(@PathVariable String productId){
+        return Optional.ofNullable(productService.byId(productId))
+                .map(callbackJSON -> new ResponseEntity<>(callbackJSON, HttpStatus.OK))
+                .orElse(new ResponseEntity<Product>(HttpStatus.BAD_REQUEST));
     }
 }

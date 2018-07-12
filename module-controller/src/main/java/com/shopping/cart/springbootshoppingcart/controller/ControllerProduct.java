@@ -6,6 +6,10 @@ import com.shopping.cart.springbootshoppingcart.service.ProductService;
 import com.shopping.cart.springbootshoppingcart.validator.ProductValidator;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,19 +50,19 @@ public class ControllerProduct {
     public ModelAndView viewProduct(){
         ModelAndView view = new ModelAndView();
         view.setViewName("product/index");
+        view.addObject("list", productService.listProduct());
         view.addObject("title", "Data Product");
         return view;
     }
 
+    @GetMapping(value = {"/productImage"})
+    public void productImage(HttpServletRequest request,
+                             HttpServletResponse response,
+                             @RequestParam("productId")String productId) throws IOException{
 
-    @ResponseBody
-    @GetMapping(value = "/productImage")
-    public void handlingImage(HttpServletRequest request, HttpServletResponse response,
-                              @RequestParam("productId") String productId)throws IOException{
-
-        Product product = null;
+        Product product=null;
         if (productId!=null){
-            product = this.productService.byId(productId);
+            product=this.productService.byId(productId);
         }
         if (product!=null && product.getImage()!=null){
             response.setContentType("image/jpeg, image/jpeg ,image/png, image/gif");
