@@ -37,16 +37,25 @@
                             <div class="form-group">
                                 <div class="col-lg-6">
                                     <input type="text" placeholder="Name of product" class="form-control" th:field="*{productName}"/>
+                                    <!--validation-->
+                                    <label th:if="${#fields.hasErrors('productName')}"
+                                           th:errors="*{productName}" style="color:red;">..</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-6">
                                     <input type="number" placeholder="Price of product" class="form-control" th:field="*{productPrice}"/>
+                                    <!--validation-->
+                                    <label th:if="${#fields.hasErrors('productPrice')}"
+                                    th:errors="*{productPrice}" style="color:red;">..</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-6">
                                     <input type="number" placeholder="Stock of product" class="form-control" th:field="*{productStock}"/>
+                                    <!--validation-->
+                                    <label th:if="${#fields.hasErrors('productStock')}"
+                                    th:errors="*{productStock}" style="color:red">..</label>
                                 </div>
                             </div>
                             <div class="form-group">
