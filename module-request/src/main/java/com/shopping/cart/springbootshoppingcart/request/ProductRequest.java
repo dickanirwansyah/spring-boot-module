@@ -19,8 +19,10 @@ public class ProductRequest {
 
     private MultipartFile productMultipartFile;
 
-    public ProductRequest(){
+    private boolean newProduct = false;
 
+    public ProductRequest(){
+        this.newProduct = true;
     }
 
     public ProductRequest(Product product){

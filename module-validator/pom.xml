@@ -20,6 +20,12 @@
 
         <dependency>
             <groupId>com.shopping.cart</groupId>
+            <artifactId>module-configuration</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.shopping.cart</groupId>
             <artifactId>module-properties</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

@@ -26,17 +26,18 @@ public class Product {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idproduct;
 
-    @NotBlank
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull
     @Column(name = "stock", nullable = false)
     private Integer stock;
 
-    @NotNull
     @Column(name = "price", nullable = false)
     private Integer price;
+
+    @Lob
+    @Column(name = "image", length = Integer.MAX_VALUE)
+    private byte[] image;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)

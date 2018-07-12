@@ -10,6 +10,8 @@ public interface ProductService {
 
     Optional<Product> findById(String productId);
 
+    Product byId(String productId);
+
     Product createProduct(ProductRequest productRequest);
 
     List<Product> listProduct();
