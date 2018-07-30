@@ -20,6 +20,16 @@
                         <div class="card-header">
                             <h4>Login for Manager & Employee</h4>
                         </div>
+                            <!--message validasi-->
+                            <th:block th:if="${#session !=null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION')!=null}">
+                                <br/>
+                                <div class="alert alert-danger col-lg-6 col-lg-offset-6" th:if="${#request.getParameter('error')=='true'}">
+                                    Login Failed
+                                    <br/>
+                                    <span th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></span>
+                                </div>
+                            </th:block>
+                            <!--message validasi-->
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="col-lg-6">
