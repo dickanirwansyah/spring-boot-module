@@ -21,7 +21,7 @@
                     <a href="/" class="nav-link">Home</a>
                 </li>
                 <li th:classappend="${#httpServletRequest.getRequestURI() == '/product' ? 'active':''}">
-                    <th:block sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_EMPLOYEE')">
+                    <th:block sec:authorize="hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER')">
                         <a href="/product" class="nav-link">Product</a>
                     </th:block>
                 </li>
@@ -31,6 +31,14 @@
                     </th:block>
                 </li>
             </ul>
+
+            <form class="form-inline my-2 my-lg-0" th:action="@{/admin/logout}">
+                <th:block sec:authorize="isAuthenticated()">
+                    <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">
+                        Logout
+                    </button>
+                </th:block>
+            </form>
         </div>
     </nav>
 </body>
