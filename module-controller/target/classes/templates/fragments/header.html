@@ -17,13 +17,18 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li th:classappend="${#httpServletRequest.getRequestURI() == '/' ?'active':''}">
+                    <th:block sec="!isAuthenticated()"></th:block>
                     <a href="/" class="nav-link">Home</a>
                 </li>
                 <li th:classappend="${#httpServletRequest.getRequestURI() == '/product' ? 'active':''}">
-                    <a href="/product" class="nav-link">Product</a>
+                    <th:block sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_EMPLOYEE')">
+                        <a href="/product" class="nav-link">Product</a>
+                    </th:block>
                 </li>
                 <li th:classappend="${#httpServletRequest.getRequestURI() == '/cart' ? 'active':''}">
-                    <a href="/cart" class="nav-link">Cart</a>
+                    <th:block sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_EMPLOYEE')">
+                        <a href="/cart" class="nav-link">Cart</a>
+                    </th:block>
                 </li>
             </ul>
         </div>

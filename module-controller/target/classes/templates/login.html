@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+</head>
+<!--menu-->
+<th:block th:include="fragments/header"></th:block>
+<br/>
+<br/>
+<br/>
+<body>
+    <div class="container">
+        <div class="container-fluid">
+            <div align="center">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="card">
+                        <form class="form-horizontal" method="post" th:action="@{/j_spring_security_check}">
+                        <div class="card-header">
+                            <h4>Login for Manager & Employee</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                <input type="text" class="form-control" name="username" placeholder="Username"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                <input type="password" class="form-control" name="password" placeholder="Password"/>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-info">Login</button>
+                                <a href="" class="btn btn-success">Need Account</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

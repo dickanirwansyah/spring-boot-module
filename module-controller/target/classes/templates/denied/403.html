@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:utext="${title}"></title>
+</head>
+    <th:block th:include="/fragments/header"></th:block>
+    <br/>
+    <br/>
+<body>
+    <div class="container">
+        <div class="container-fluid">
+            <div class="jumbotron">
+                <h2 th:utext="${title}"></h2>
+                <p>Sorry your access is denied to access this page !</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
