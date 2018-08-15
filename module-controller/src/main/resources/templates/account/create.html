@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:utext="${title}"></title>
+</head>
+<th:block th:include="fragments/header"></th:block>
+<br/>
+<br/>
+<body>
+    <div class="container">
+        <div class="container-fluid">
+            <div align="center">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>New Account</h4>
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-info">Create</button>
+                            <a th:href="@{/admin/login}" class="btn btn-success">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

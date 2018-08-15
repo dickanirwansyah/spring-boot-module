@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -46,11 +45,16 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter{
                         "/add_product",
                         "/update_product")
                     .access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER')");
+        httpSecurity.authorizeRequests()
+                .antMatchers("/account/create")
+                .permitAll();
+
         httpSecurity
                 .authorizeRequests()
                     .and()
                 .exceptionHandling()
                 .accessDeniedPage("/403");
+
         httpSecurity
                 .authorizeRequests()
                     .and()

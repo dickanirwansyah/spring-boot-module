@@ -26,6 +26,13 @@ public class ControllerMain {
         return "account/accountInfo";
     }
 
+    //create account
+    @RequestMapping(value = {"/account/create"})
+    public String createAccount(Model model){
+        model.addAttribute("title", "Register Account");
+        return "account/create";
+    }
+
     //access denied
     @RequestMapping(value = "/403")
     public String page403(Model model){
