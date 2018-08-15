@@ -16,5 +16,7 @@ public interface CategoryService {
 
     Category disabled(CategoryRequest categoryRequest, Long CategoryId);
 
+    Category enabled(CategoryRequest categoryRequest, Long categoryId);
+
     Optional<Category> findId(Long id);
 }

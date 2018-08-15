@@ -85,6 +85,22 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
+    public Category enabled(CategoryRequest categoryRequest, Long categoryId) {
+        Optional<Category> IdCategory = categoryRepository.findById(categoryId);
+
+        if (!IdCategory.isPresent()){
+            throw new CategoryNotFoundException("category tidak ada");
+        }else{
+            Category category = Category.builder()
+                    .id(categoryId)
+                    .name(categoryRequest.getCategoryName())
+                    .active(true)
+                    .build();
+            return categoryRepository.save(category);
+        }
+    }
+
+    @Override
     public Optional<Category> findId(Long id) {
         Optional<Category> IdCategory = categoryRepository.findById(id);
 

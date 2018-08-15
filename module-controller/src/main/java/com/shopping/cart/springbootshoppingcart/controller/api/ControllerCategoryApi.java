@@ -40,4 +40,10 @@ public class ControllerCategoryApi {
     public Optional<Category> findId(@PathVariable Long categoryId){
         return categoryService.findId(categoryId);
     }
+
+    @PutMapping(value = "/enabled/{categoryId}")
+    public Category enabled(@PathVariable Long categoryId,
+                            @RequestBody CategoryRequest categoryRequest){
+        return categoryService.enabled(categoryRequest, categoryId);
+    }
 }
